@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package api.empty.v1;
+
+import "errors/errors.proto";
+
+option go_package = "example.com/api/empty/v1;v1";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  ERROR_REASON_UNSPECIFIED = 0;
+  PLAIN_ERROR = 1 [(errors.code) = 400];
+}

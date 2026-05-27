@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package api.helloworld.v1;
+
+import "errors/errors.proto";
+
+option go_package = "example.com/api/helloworld/v1;v1";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  // User does not exist.
+  USER_NOT_FOUND = 0 [(errors.code) = 404];
+  // Request payload is missing required fields.
+  CONTENT_MISSING = 1 [(errors.code) = 400];
+}

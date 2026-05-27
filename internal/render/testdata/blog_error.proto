@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package api.blog.v1;
+
+import "errors/errors.proto";
+
+option go_package = "example.com/api/blog/v1;v1";
+
+enum BlogErrorReason {
+  option (errors.default_code) = 500;
+
+  ERROR_REASON_UNSPECIFIED = 0;
+  UNAUTHORIZED = 1 [(errors.code) = 401];
+  FORBIDDEN = 2 [(errors.code) = 403];
+  // Article not found or already deleted.
+  ARTICLE_NOT_FOUND = 3 [(errors.code) = 404];
+  // Title contains illegal characters such as | or newline.
+  TITLE_INVALID = 4 [(errors.code) = 400];
+  // Comment rate limit exceeded.
+  // Please try again later.
+  RATE_LIMITED = 5 [(errors.code) = 429];
+  INTERNAL = 6;
+}
